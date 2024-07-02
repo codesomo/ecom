@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content %}
+<!-- Categroy Section -->
+<div class="container">
+    <h3>All Category</h3>
+    <div class="row">
+        {% for category in category %}
+
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{category.category_image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{category.category_name }}</h5>
+                    <p class="card-text">{{category.category_description}}</p>
+
+                    <a href="/category_details/?category_id={{category.id}}" class="btn btn-primary">View Detail</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<!-- end category section -->
+<!-- Footer 2 - Bootstrap Brain Component -->
+
+<div style="height:550px; padding-top: 20px;">
+
+    
+
+</div>
+{% endblock content %}

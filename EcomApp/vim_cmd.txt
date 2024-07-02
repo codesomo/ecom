@@ -1,0 +1,15 @@
+
+    Vim Editor //for linux only
+    Commands:
+     open file: vi <filename.extention>
+     edit/ insert text: press insert/i key
+     save changes: Esc  :wq Enter
+     quit without save:  Esc :q Enter
+     force quit: Esc :q! Enter
+     delete single line: Esc dd
+     delete all lines: Esc d Sift+G
+
+    AWS Accounts
+      
+      EC2 > Elastic Cloud Computing
+    Cloud Computing

@@ -1,0 +1,44 @@
+{% extends "index.html" %}
+
+{% block content %}
+<!-- Categroy Section -->
+<div class="container">
+    <h3>Category</h3>
+    <div class="row">
+     <h5> {{category.category_name}}</h5>  
+    <img style="width: 40%;" src="{{category.category_image.url}}" class="card-img-top" alt="...">
+    </div>
+</div>
+<!-- category_name = models.CharField(max_length=100)
+category_description = models.CharField(max_length=255)
+category_image = models.ImageField(upload_to ='upload_images/') -->
+<!-- end category section -->
+<!-- Footer 2 - Bootstrap Brain Component -->
+
+<div style="height:550px; padding-top: 20px;">
+
+    <div class="container">
+        <h3>Items</h3>
+        <div class="row">
+
+            {% for item in item_data %}
+
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{item.item_image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.item_name}}</h5>
+                        <p class="card-text">{{item.category_description}}</p>
+                        <p class="card-text">Rs. {{item.item_price}} </p>
+                        <a href="/item_details/?item_id={{item.id}}" class="btn btn-primary">View Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+</div>
+{% endblock content %}

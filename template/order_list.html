@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<div style="padding-top: 20px;"
+    <div class="container " style="width:30% !important">
+        <h4>Order History</h4>
+        <br>
+
+
+        {% for order in order_list %}
+        <div class="row">
+
+        <div class="col-6">
+            <div >
+                <!-- <img src="{{cart.item.item_image.url}}" class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <p class="card-title">Order date: <b>{{order.order_date}}</b></p>
+                    <p class="card-title">Payment mode: <b>{{order.payment_mode}}</b></p>
+                    <p class="card-title">Expected delivery date: <b>{{order.expected_delivery_date}}</b></p>
+                    <p class="card-title">Total Amount: <b>{{order.total_amount}}</b></p>
+                    <p class="card-title">Payment Id:<b> {{order.payment.transaction_id}}</b></p>
+
+                </div>
+            </div>
+        </div>
+
+            <div class="col-6">
+                <div >
+                    {% for order_item in order.item_order.all %}
+
+                    <p> Item: <b>{{order_item.item.item_name}}</b> </p>
+                    <p> Qty: <b>{{order_item.quantity}}</b> </p>
+                   {% endfor %}
+
+
+                    <!-- <div class="card-body">
+                        <p class="card-text"> Price per unit: Rs. {{cart.item.item_price}} </p>
+                        <p class="card-text">Qty: {{cart.quantity}} </p>
+                        <h6 class="card-text">Sub-Total: Rs. {{cart.amount}} </h6>
+                
+                    </div> -->
+                </div>
+            </div>
+            
+       
+        </div>
+        <hr/>
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+
+{% block content %}
+<!-- Categroy Section -->
+<div class="container">
+    <h3>Category</h3>
+    <div class="row">
+        {% for category in category_list %}
+
+        <div class="col-3">
+            <div class="card" style="width: 18rem;">
+                <img src="{{category.category_image.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{category.category_name }}</h5>
+                    <p class="card-text">{{category.category_description}}</p>
+
+                    <a href="/category_details/?category_id={{category.id}}" class="btn btn-primary">View Detail</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+                
+    </div>
+        <a style="  margin-top: 10px;  margin-left: 80%;
+            width: 15%;" href="/all_category" class="btn btn-secondary">More Category >></a>
+</div>
+<!-- end category section -->
+<!-- Footer 2 - Bootstrap Brain Component -->
+
+<div style="height:550px; padding-top: 20px; margin-bottom: 30px;">
+   
+        <div class="container">
+            <h3>New Items</h3>
+            <div class="row">
+
+                {% for item in item_list %}
+
+                <div class="col-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{item.item_image.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.item_name}}</h5>
+                            <p class="card-text">{{item.category_description}}</p>
+                            <p class="card-text">Rs. {{item.item_price}} </p>
+                            <a href="/item_details/?item_id={{item.id}}" class="btn btn-primary">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+            <a  style="margin-left: 80%;" href="/all_items" class="btn btn-secondary">More Items >></a>
+        </div>
+
+    
+</div>
+{% endblock content %}

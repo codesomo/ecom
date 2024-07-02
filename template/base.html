@@ -1,0 +1,55 @@
+
+{% load static %}
+<!-- <!DOCTYPE html>
+
+<head>
+    <title>My Awesome Site</title>
+</head>
+
+<body>
+    <h1> Hello, This is from Index.html</h1>
+    <h3>{{ insert_me }}</h3>
+</body>
+
+</html> -->
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h2>Hello this is a first django template Crud Function</h2>
+    <h3>List of the Category</h3>
+    <button onclick="goTo_add_page()"> Add +</button>
+        <table border="1">
+        <tr>
+        <th> category ID</th>
+        <th>Category name</th>
+        <th>Category description</th>
+        <th>Created date</th>
+        <th>Update</th>
+        <th>Delete</th>
+</tr>
+        {% for oject in category %}
+        
+<tr>
+    <td>{{oject.id}}</td>
+    <td>{{oject.category_name}}</td>
+    <td>{{oject.category_description}}</td>
+    <td>{{oject.created_date}}</td>
+    <td><a href="/update/?category_id={{oject.id}}">Update</a></td>
+    <td><a href="/delete/?category_id={{oject.id}}">Delete</a></td>
+</tr>
+
+       <b>{{i}}</b> 
+
+        {% endfor %}
+
+    </table>
+
+    <script>
+        function goTo_add_page() { 
+             window.location.href = "/add";
+        }
+    </script>
+    </body>
+</html>

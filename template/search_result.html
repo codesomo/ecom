@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+
+<div style="height:550px; padding-top: 20px;">
+
+    <div class="container">
+
+        {%  if found == True %}
+
+        <h3>Search Result</h3>
+
+        <br>
+        <div class="row">
+
+            {% for item in seacrh_result %}
+
+            <div class="col-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{item.item_image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.item_name}}</h5>
+                        <p class="card-text">{{item.category_description}}</p>
+                        <p class="card-text">Rs. {{item.item_price}} </p>
+                        <a href="/item_details/?item_id={{item.id}}" class="btn btn-primary">View Detail</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+{% else %}
+
+<h5 style="color:red ; text-align: center;"> Oops, Search Item Not Found! Please try to search another item.</h5>
+    
+{% endif %}
+</div>
+
+
+</div>
+{% endblock content %}

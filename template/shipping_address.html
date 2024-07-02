@@ -1,0 +1,154 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container" style="">
+
+{% if is_address == True %}
+<h5 style="color: rgb(15, 114, 81);">Select Shipping Address</h5>
+  
+<form >
+
+
+                {% for add  in address_list %}
+
+
+    
+          <input type="radio"  id="{{add.id}}" name="shipp_address" value="{{add.id}}">
+          
+        <label for="{{add.id}}">
+            
+            <div>
+            <h5> {{add.name}}</h5>
+            <h6> {{add.address}}</h6>
+            <p> {{add.landmark}},{{add.pin}}, {{add.phone}}</p>
+        
+        </div>
+    
+    </label>
+        
+        <br>
+          
+    <hr/>
+
+    {% endfor %}
+<!-- <button type="submit" class="btn btn-success" >Proceed to Payment</button> -->
+
+</form>
+
+{% else %}
+
+{% endif %}
+
+<!-- Payment Section -->
+<button id="rzp-button1"class="btn btn-success" >Proceed to Payment</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+let sipping_address_id=0
+
+    $('input[type=radio][name=shipp_address]').change(function (e) {
+
+       
+        sipping_address_id = e.target.id
+        // alert(sipping_address_id)
+    })
+
+
+    
+    var options = {
+        "key": "rzp_test_nLCSprvGLYiGT4", // Enter the Key ID generated from the Dashboard
+        "amount": "{{total_amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Arigato Ecom", //your business name
+        "description": " Arigato Payment Transaction",
+        "image": "https://example.com/your_logo",
+        //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response) {
+
+           
+window.location.href = '/payment_order_handler/?trasaction_id='+ response.razorpay_payment_id+'&shipping_id='+ sipping_address_id+'&amount='+'{{total_amount}}';
+           
+            //alert(response.razorpay_payment_id);
+          
+        },
+        "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+            "name": "{{username}}", //your customer's name
+            "email": "{{email}}",
+            "contact": "9485268698"  //Provide the customer's phone number for better conversion rates 
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#FF5733"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function (e) {
+        if (sipping_address_id==0)
+        {
+            alert("please select shipping address.")
+            return false;
+        }
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
+<!-- end of payment section -->
+
+
+<br><br>
+<h5 style="color: rgb(15, 114, 81);">Add New Address</h5>
+    <form method="POST" action="/add_shipping_address/">
+        {% csrf_token %}
+        <br>
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Name</label>
+            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Name">
+
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Address</label>
+            <input type="text" name="address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                placeholder="Address">
+
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="exampleInputPassword1">Landmark</label>
+            <input type="text" name="landmark" class="form-control" id="exampleInputPassword1"
+                placeholder="Landmark">
+        </div>
+        <br>
+            <div class="form-group">
+                <label for="exampleInputPassword1">PIN</label>
+                <input type="text" name="pin" class="form-control" id="exampleInputPassword1" placeholder="PIN">
+            </div>
+            <br>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Phone</label>
+                            <input type="number" name="phone" class="form-control" id="exampleInputPassword1" placeholder="Phone Number">
+                        </div>
+                        <br>
+        <button type="submit" class="btn btn-primary">Add Shipping Address</button>
+    </form>
+</div>
+            <br>
+
+            <br>
+
+{% endblock content %}

@@ -1,0 +1,52 @@
+
+<html>
+
+<head>
+
+</head>
+
+<body>
+    {% if update == True %}
+    <h2>Update Category</h2>
+    <h3>Category ID:  {{selected_category.id}}</h3>
+
+    <form method="POST" action="/update_handler/">
+{% else %}
+    
+<h2>Add / Create Category</h2>
+    <form method="POST" action="/add_handler/">
+    {% endif %}
+
+
+{% csrf_token %}
+
+    <input style="visibility: hidden;" type="text" name="category_id" value="{{selected_category.id}}">
+   <br>
+    <label for="category_name">  Category Name</label>
+    <br>
+
+    <input type="text" name="category_name" placeholder="category name" value="{{selected_category.category_name}}">
+    <br>
+    <hr>
+
+    <label for="category_description"> Category description </label>
+    <br>
+
+    <input type="text" name="category_description" placeholder="category description" value="{{selected_category.category_description}}">
+    <br>
+    
+    <br>
+    {% if update == True %}
+<input type="submit" name="" value="update">
+    {% else %}
+<input type="submit" name="" value="add">
+    {% endif %}
+    
+
+
+
+</form>
+
+</body>
+
+</html>
